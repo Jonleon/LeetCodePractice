@@ -12,7 +12,7 @@ public class leetcodeLinkedList {
     public static void main(String[] args) {
         int[] args1 = {1,2,3,4,5};
         ListNode head = buildListNode(args1);
-        ListNode tar = middleNode(head);
+        reverseBetween(head,5,5);
 
 
     }
@@ -164,8 +164,51 @@ public class leetcodeLinkedList {
         return head;
     }
 
+    /**
+     * 区间反转链表
+     *  1 - 2 - 3 - 4 - 5   =>   1 - 4 - 3 - 2 - 5
+     * @param head
+     * @param left
+     * @param right
+     * @return
+     */
     static ListNode reverseBetween(ListNode head, int left, int right) {
-        return  null;
+        // find left -1 node
+        //find right + 1 node
+        //reverse left node
+        // joint nodes
+        int count = 0;
+        ListNode slow = null;
+        ListNode fast = null;
+        ListNode leftNode = head;
+        ListNode rightNode = head;
 
+        while (count != left - 1) {
+            count++;
+            slow = leftNode;
+            leftNode = leftNode.next;
+        }
+        rightNode = leftNode;
+        while (count != right - 1) {
+            count++;
+            rightNode = rightNode.next;
+        }
+        if (rightNode != null) {
+            fast = rightNode.next;
+        } else {
+            fast = null;
+        }
+        rightNode.next = null;
+        ListNode newLeft = reserveList(leftNode);
+        if (slow != null) {
+            slow.next = newLeft;
+        } else {
+            head = newLeft;
+        }
+        if (leftNode != null) {
+            leftNode.next = fast;
+        }
+
+        return head;
     }
 }
