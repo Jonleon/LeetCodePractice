@@ -1,19 +1,13 @@
-import org.omg.PortableServer.LIFESPAN_POLICY_ID;
-
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 
 public class leetcodeLinkedList {
 
-
     public static void main(String[] args) {
-        int[] args1 = {1,2,3,4,5};
+        int[] args1 = {1, 1, 1, 2, 3, 3, 4, 4, 5};
         ListNode head = buildListNode(args1);
-        reverseBetween(head,5,5);
-
+        // reverseBetween(head,5,5);
+        deleteDuplicates1(head);
 
     }
 
@@ -28,7 +22,7 @@ public class leetcodeLinkedList {
             }
             curr = next;
         }
-        return  false;
+        return false;
     }
 
     // 快慢双指针
@@ -50,16 +44,6 @@ public class leetcodeLinkedList {
             }
         }
         return false;
-    }
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
     }
 
     static ListNode deleteDuplicates(ListNode head) {
@@ -165,8 +149,8 @@ public class leetcodeLinkedList {
     }
 
     /**
-     * 区间反转链表
-     *  1 - 2 - 3 - 4 - 5   =>   1 - 4 - 3 - 2 - 5
+     * 区间反转链表 1 - 2 - 3 - 4 - 5 => 1 - 4 - 3 - 2 - 5
+     *
      * @param head
      * @param left
      * @param right
@@ -174,8 +158,8 @@ public class leetcodeLinkedList {
      */
     static ListNode reverseBetween(ListNode head, int left, int right) {
         // find left -1 node
-        //find right + 1 node
-        //reverse left node
+        // find right + 1 node
+        // reverse left node
         // joint nodes
         int count = 0;
         ListNode slow = null;
@@ -210,5 +194,93 @@ public class leetcodeLinkedList {
         }
 
         return head;
+    }
+
+    /**
+     * reorder 0 1 2 3 4 => 0 4 1 3 2
+     *
+     * @param head
+     */
+    static void reorderList(ListNode head) {
+        // set2 = set1.stream().map(Object::toString).collect(Collectors.toSet());
+        // find mid node and mid pre node
+        // reverse mid - end,
+        // merge head - midpre and mid - end
+        ListNode pre = head.next;
+        ListNode back = head;
+        while (pre != null) {
+            pre = pre.next;
+            if (pre != null) {
+                pre = pre.next;
+            } else {
+
+                break;
+            }
+            back = back.next;
+        }
+        ListNode mid = back.next;
+        back.next = null;
+        ListNode rightS = reserveList(mid);
+
+        ListNode curr = head;
+        while (rightS != null) {
+            ListNode tmp = curr.next;
+            ListNode tmp2 = rightS.next;
+            curr.next = rightS;
+            rightS = tmp2;
+            curr = tmp;
+
+        }
+
+    }
+
+    /**
+     * 1 2 3 4 5 5 6 => 1 2 3 4 6
+     *
+     * @param head
+     * @return
+     */
+    static ListNode deleteDuplicates1(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode preNode = new ListNode(101);
+        preNode.next = head;
+        boolean flag = false;
+        ListNode left = preNode;
+        ListNode mid = head;
+
+        ListNode right = head.next;
+        while (right != null) {
+            if (mid.val == right.val) {
+                right = right.next;
+                if (right == null) {
+                    left.next = null;
+                }
+                flag = true;
+            } else {
+                if (flag) {
+                    left.next = right;
+                    mid = right;
+                    right = right.next;
+                    flag = false;
+                } else {
+                    right = right.next;
+                    mid = mid.next;
+                    left = left.next;
+                }
+            }
+        }
+        return preNode.next;
+    }
+
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
     }
 }
