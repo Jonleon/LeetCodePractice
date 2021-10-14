@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class leetCode4Array {
+public class leetCode4ArrayList {
 
     static Random random = new Random();
 
