@@ -89,6 +89,9 @@ public class ZumaGame {
     class Solution {
         public int findMinStep(String board, String hand) {
 
+
+
+            return -1;
         }
     }
     // leetcode submit region end(Prohibit modification and deletion)

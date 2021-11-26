@@ -198,6 +198,7 @@ public class Dota2Senate {
                 } else {
                     d.offer(dIndex + len);
                 }
+
             }
             if (r.isEmpty()) {
                 return "Dire";
