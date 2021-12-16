@@ -50,6 +50,8 @@ package leao.leetcode.editor.cn;
 public class PerfectRectangle {
     public static void main(String[] args) {
         Solution solution = new PerfectRectangle().new Solution();
+
+
     }
 
     // leetcode submit region begin(Prohibit modification and deletion)

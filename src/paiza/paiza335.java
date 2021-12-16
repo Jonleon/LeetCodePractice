@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class paiza335 {
     public static void main(String[] args) {
@@ -64,10 +65,9 @@ public class paiza335 {
 
     }
 
-
     static void sol2() {
         Scanner sc = new Scanner(System.in);
-        Map<String,List<Integer>> map = new HashMap<>(26);
+        Map<String, List<Integer>> map = new HashMap<>(26);
         int n = sc.nextInt();
         List<String> keyboards = new ArrayList<>(n);
         for (int i = 0; i < n; i++) {
@@ -75,14 +75,14 @@ public class paiza335 {
         }
         String[] target = sc.next().split("");
         for (int i = 0; i < 26; i++) {
-           String tmp = String.valueOf((char) (i + 'a'));
-           List<Integer> indexs =  new ArrayList<>();
-           for (int j = 0; j < keyboards.size();j++) {
-               if (keyboards.get(j).contains(tmp)) {
-                   indexs.add(j);
-               }
-           }
-           map.put(tmp,indexs);
+            String tmp = String.valueOf((char)(i + 'a'));
+            List<Integer> indexs = new ArrayList<>();
+            for (int j = 0; j < keyboards.size(); j++) {
+                if (keyboards.get(j).contains(tmp)) {
+                    indexs.add(j);
+                }
+            }
+            map.put(tmp, indexs);
         }
         int count = 0;
         int left = 0;
@@ -90,7 +90,7 @@ public class paiza335 {
         List<Integer> a = map.get(target[left]);
         List<Integer> b = map.get(target[right]);
         while (right <= target.length - 1) {
-            List<Integer> res  = isContains(a,b);
+            List<Integer> res = isContains(a, b);
             if (res.size() > 0) {
                 a = res;
                 right++;
@@ -115,7 +115,7 @@ public class paiza335 {
 
     }
 
-    static List<Integer> isContains (List<Integer> i1,List<Integer>i2) {
+    static List<Integer> isContains(List<Integer> i1, List<Integer> i2) {
         List<Integer> res = new ArrayList<>();
         for (int t : i1) {
             if (i2.contains(t)) {
@@ -125,8 +125,6 @@ public class paiza335 {
         return res;
     }
 
-
-
     static void sol3() {
 
         Scanner sc = new Scanner(System.in);
@@ -134,24 +132,61 @@ public class paiza335 {
         int k = sc.nextInt();
         int s = sc.nextInt();
         int t = sc.nextInt();
-        String [] result = new String[k];
+        String[] result = new String[k];
         result[0] = "ABC";
 
-        String res = build(k,result);
-        System.out.println(res.substring(s-1,t));
-
+        String res = build(k, result);
+        System.out.println(res.substring(s - 1, t));
 
     }
-    static String build(int k,String [] result) {
 
-        for (int i = 1; i <= k-1; i++) {
-            result[i] = "A" + result[i-1] + "B" + result[i-1] + "C";
+    static String build(int k, String[] result) {
+
+        for (int i = 1; i <= k - 1; i++) {
+            result[i] = "A" + result[i - 1] + "B" + result[i - 1] + "C";
             if (i >= 4) {
                 result[i - 4] = "";
                 result[i - 3] = "";
                 result[i - 2] = "";
             }
         }
-        return result[k-1];
+        return result[k - 1];
+    }
+
+    static void sol4() {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        // map a - z
+        Map<String, String> map = new HashMap<>(26);
+        for (int i = 0; i < 26; i++) {
+            String tmp = String.valueOf((char)(i + 'a'));
+            map.put(tmp, String.valueOf(0));
+        }
+
+        int right = 0;
+        int left = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            char t = str.charAt(i);
+            if (t == '(') {
+                right++;
+            } else if (t == ')') {
+                left++;
+            } else if (t >= '0' && t <= '9') {
+
+            } else if (t > 'a' && t < 'z') {
+                int res = 0;
+                if (right > left) {
+
+                }
+                map.put(t + "", map.get(t + "") + res);
+            }
+
+        }
+
+        for (String t : map.keySet()) {
+
+        }
+
     }
 }
