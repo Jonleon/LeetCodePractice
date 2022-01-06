@@ -89,6 +89,21 @@ public class BinaryTreeInorderTraversal {
 
                 }
             }
+
+            String s = "";
+            int i=0,j=1;
+            while (i < s.length()-1 && j < s.length()) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    // return false;
+                } else {
+                    j++;
+                }
+                if (j == s.length()-1) {
+                    i++;
+                    j = i + 1;
+                }
+            }
+            // return true;
             return res;
         }
     }
