@@ -44,6 +44,7 @@ package leao.leetcode.editor.cn;
 public class DeleteAndEarn {
     public static void main(String[] args) {
         Solution solution = new DeleteAndEarn().new Solution();
+        String userCd = null;
     }
 
     // leetcode submit region begin(Prohibit modification and deletion)
