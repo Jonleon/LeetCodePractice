@@ -61,6 +61,7 @@ import java.util.Stack;
 public class ValidParentheses {
     public static void main(String[] args) {
         Solution solution = new ValidParentheses().new Solution();
+        System.out.println(solution.canBeValid("))()))", "010100"));
     }
 
     // leetcode submit region begin(Prohibit modification and deletion)
@@ -73,7 +74,7 @@ public class ValidParentheses {
                         return false;
                     } else {
                         char left = stack.pop();
-                        if (charEquals(left,c)) {
+                        if (charEquals(left, c)) {
                             continue;
                         } else {
                             return false;
@@ -92,16 +93,58 @@ public class ValidParentheses {
         }
 
         public boolean charEquals(char a, char b) {
-            if (a == '(') {
-                return b == ')';
-            } else if (a == '[') {
-                return b == ']';
-            } else if (a == '{') {
-                return b == '}';
-            } else {
-                return false;
+            switch (a) {
+                case '(':
+                    return b == ')';
+
+                case '[':
+                    return b == ']';
+
+                case '{':
+                    return b == '}';
+
+                default:
+                    return false;
+
             }
         }
+
+        public boolean canBeValid(String s, String locked) {
+            if (s.length() % 2 == 1) {
+                return false;
+            }
+            int total = 0;
+            int open = 0, close = 0;
+            for (int i = 0; i < s.length(); i++) {
+                if (locked.charAt(i) == '0') {
+                    total++;
+                } else if (s.charAt(i) == '(') {
+                    open++;
+                } else {
+                    close++;
+                }
+                if (total + open - close < 0) {
+                    return false;
+                }
+            }
+
+            total = open = close = 0;
+            for (int i = s.length() - 1; i >= 0; i--) {
+                if (locked.charAt(i) == '0') {
+                    total++;
+                } else if (s.charAt(i) == '(') {
+                    open++;
+                } else {
+                    close++;
+                }
+                if (total - open + close < 0) {
+                    return false;
+                }
+            }
+            return true;
+
+        }
+
     }
     // leetcode submit region end(Prohibit modification and deletion)
 
