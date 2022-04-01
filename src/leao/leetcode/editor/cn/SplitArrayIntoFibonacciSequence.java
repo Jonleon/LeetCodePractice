@@ -61,13 +61,20 @@
 package leao.leetcode.editor.cn;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SplitArrayIntoFibonacciSequence {
 
     public static void main(String[] args) {
-        Solution solution = new SplitArrayIntoFibonacciSequence().new Solution();
-        System.out.println(solution.splitIntoFibonacci("1101111"));
+        //Solution solution = new SplitArrayIntoFibonacciSequence().new Solution();
+        //System.out.println(solution.splitIntoFibonacci("1101111"));
+        String x = null;
+        String y = "124";
+        List<String> tmp = new ArrayList<>();
+        System.out.println(x+y);
+
+
     }
 
     // leetcode submit region begin(Prohibit modification and deletion)
@@ -108,6 +115,7 @@ public class SplitArrayIntoFibonacciSequence {
                     return ans;
                 }
                 path.remove(path.size() - 1);
+
             }
             return ans;
         }
