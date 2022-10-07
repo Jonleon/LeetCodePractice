@@ -55,7 +55,10 @@ import java.util.List;
 public class PrimeNumberOfSetBitsInBinaryRepresentation {
     public static void main(String[] args) {
         Solution solution = new PrimeNumberOfSetBitsInBinaryRepresentation().new Solution();
-        solution.letterCombinations("23");
+        //solution.letterCombinations("23");
+
+        solution.rotateString("abcde",
+                "cdeab");
     }
 
     // leetcode submit region begin(Prohibit modification and deletion)
@@ -81,7 +84,7 @@ public class PrimeNumberOfSetBitsInBinaryRepresentation {
         }
 
         public void backtracking(List<String> results, StringBuilder sb, int i, String digits) {
-            //return condition
+            // return condition
             if (i >= digits.length()) {
                 results.add(sb.toString());
                 return;
@@ -154,6 +157,78 @@ public class PrimeNumberOfSetBitsInBinaryRepresentation {
         //
         // return true;
         // }
+
+        public List<String> getAllPaths(int n) {
+            List<String> res = new ArrayList<>();
+            Step now = new Step(0, 0, new StringBuilder());
+            BFS(now, res, n);
+            return res;
+        }
+
+        // BFS to get all | DFS to get best
+        public void BFS(Step step, List<String> res, int n) {
+            if (step.x == n - 1 && step.y == n - 1) {
+                res.add(step.sb.toString());
+                return;
+            }
+            //dry run n = 5  0,0   1,0  2,0  3,0  4,0
+            // Right
+            if (step.x <= n-2) {
+                step.sb.append("D");
+                step.x = step.x + 1;
+                BFS(step, res, n);
+            }
+            //right then down is this right??
+            if (step.y <= n-2) {
+                step.sb.append("R");
+                step.y = step.y + 1;
+                BFS(step, res, n);
+            }
+        }
+
+        /**
+         * TL;DR of Variant of Unique Paths
+         *
+         * You are given a method signature of List<String> uniquePaths(int n), where n is the size of an n x n
+         * 2-dimensional array. You have to return a dynamic array of all possible paths, where you may only go down and
+         * right--a single move right will be represented by the character R, and a single move down will be represented
+         * by the character D. Each string represents each possible path from the top-most index to the bottom-most
+         * index. Backtracking may be used to achieve this.
+         */
+        public class Step {
+            int x;
+            int y;
+            StringBuilder sb;
+
+            public Step(int x, int y, StringBuilder sb) {
+                this.x = x;
+                this.y = y;
+                this.sb = sb;
+            }
+        }
+
+        public boolean rotateString(String s, String goal) {
+            char startChar = goal.charAt(0);
+            int startIndex = -1;
+            if (s.length() != goal.length()) {
+                return false;
+            }
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == startChar) {
+                    startIndex = i;
+                    break;
+                }
+
+            }
+            if (startIndex < 0) {
+                return false;
+            }
+            StringBuilder sb = new StringBuilder();
+
+
+            return true;
+
+        }
     }
     // leetcode submit region end(Prohibit modification and deletion)
 

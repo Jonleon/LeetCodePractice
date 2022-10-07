@@ -39,18 +39,25 @@
 
 package leao.leetcode.editor.cn;
 
-import org.omg.PortableInterceptor.INACTIVE;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class ArrayOfDoubledPairs {
+    static Random random = new Random();
+
     public static void main(String[] args) {
         Solution solution = new ArrayOfDoubledPairs().new Solution();
+        HashSet<Integer> lot7 = new HashSet<>(7);
+        while (lot7.size() < 7) {
+            int i = random.nextInt(38);
+            lot7.add(i);
+        }
+        System.out.println(lot7);
     }
 
     // leetcode submit region begin(Prohibit modification and deletion)
@@ -70,12 +77,12 @@ public class ArrayOfDoubledPairs {
             for (int x : count.keySet()) {
                 vals.add(x);
             }
-            Collections.sort(vals,(a,b) -> Math.abs(a) - Math.abs(b));
+            Collections.sort(vals, (a, b) -> Math.abs(a) - Math.abs(b));
             for (int x : vals) {
-                if (count.getOrDefault(2*x,0) < count.get(x)) {
+                if (count.getOrDefault(2 * x, 0) < count.get(x)) {
                     return false;
                 }
-                count.put(2*x,count.getOrDefault(x*2,0) - count.get(x));
+                count.put(2 * x, count.getOrDefault(x * 2, 0) - count.get(x));
             }
 
             return true;

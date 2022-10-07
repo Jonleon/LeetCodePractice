@@ -59,7 +59,6 @@ public class pS002 {
             if (tmp.x == endX && tmp.y == endY) {
                 System.out.println(tmp.steps);
                 return;
-
             }
             for (int i = 0; i < 4; i++) {
                 int tx = tmp.x + dx[i];
